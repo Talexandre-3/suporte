@@ -2,7 +2,6 @@ import { createClient } from '@supabase/supabase-js'
 
 // Import the CSS via Vite to handle HMR
 import './styles.css'
-import './script.js'
 
 // Initialize Supabase Client
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://sua-url-do-supabase.supabase.co'
@@ -96,7 +95,9 @@ function updateUISettings(settings) {
 
 // Initialize App
 document.addEventListener('DOMContentLoaded', async () => {
-    // Only check auth if we are not testing locally without env vars, for now we let UI load
+    // Inicializa as configurações do sistema
+    // (será ativado após configurar o Supabase)
     // await checkAuth()
     // await fetchSettings()
+    console.log('TechSupport inicializado com sucesso.')
 })
