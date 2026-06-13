@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suporte Técnico Integrado - Dashboard</title>
-    <!-- Google Fonts -->
+    <title>TechSupport - Visão Geral</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-background text-on-background font-body-md">
     <div class="app-layout">
         
-        <!-- Mobile Header (Visible only on small screens) -->
+        <!-- Mobile Header -->
         <header class="mobile-header">
             <button id="menu-btn" class="icon-btn" aria-label="Abrir Menu">
                 <span class="material-symbols-outlined">menu</span>
@@ -24,7 +22,7 @@
             </div>
         </header>
 
-        <!-- Sidebar / Navigation -->
+        <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
@@ -45,7 +43,7 @@
             </button>
 
             <nav class="sidebar-nav">
-                <a href="index.html" class="nav-item active">
+                <a href="index.html" class="nav-item">
                     <span class="material-symbols-outlined fill-icon">dashboard</span>
                     Visão Geral
                 </a>
@@ -72,12 +70,10 @@
             </div>
         </aside>
 
-        <!-- Overlay for mobile sidebar -->
         <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
         <!-- Main Content Area -->
         <div class="main-wrapper">
-            <!-- Top Navigation Bar (Desktop) -->
             <header class="topbar">
                 <div class="search-container" style="display: flex; align-items: center; gap: 0.5rem; width: 400px;">
                     <div style="position: relative; flex: 1;">
@@ -89,16 +85,12 @@
                 </div>
 
                 <div class="topbar-actions">
-                    <select class="status-filter" style="padding: 0.5rem 1rem; border-radius: var(--border-radius-md); border: 1px solid var(--outline-variant); background-color: var(--surface-container-low); color: var(--on-surface);">
+                    <select class="status-filter" id="status-filter" style="padding: 0.5rem 1rem; border-radius: var(--border-radius-md); border: 1px solid var(--outline-variant); background-color: var(--surface-container-low); color: var(--on-surface);">
                         <option value="">Filtrar por Status</option>
-                        <option value="Pendente">Pendente</option>
-                        <option value="Em Progresso">Em Progresso</option>
-                        <option value="Concluído">Concluído</option>
                     </select>
 
                     <div class="divider"></div>
                     
-                    <!-- Botão de Ajuda -->
                     <div style="position: relative;" class="help-dropdown-container">
                         <button class="btn-text help-btn" style="display: flex; align-items: center; gap: 0.25rem;">
                             Suporte
@@ -115,9 +107,8 @@
                     <div class="profile-dropdown" style="position: relative;">
                         <span class="profile-name-top" style="font-weight: 600; font-size: 0.875rem;">Admin</span>
                         <span class="material-symbols-outlined">arrow_drop_down</span>
-                        
                         <div class="profile-menu" style="display: none; position: absolute; right: 0; top: 100%; background: var(--surface); border: 1px solid var(--outline-variant); border-radius: var(--border-radius-md); box-shadow: var(--shadow-md); min-width: 150px; z-index: 50;">
-                            <a href="configuracoes.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; hover: background-color: var(--surface-variant);">
+                            <a href="configuracoes.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem;">
                                 <span class="material-symbols-outlined" style="font-size: 1.125rem;">account_circle</span>
                                 Perfil do Usuário
                             </a>
@@ -130,10 +121,8 @@
                 </div>
             </header>
 
-            <!-- Page Content -->
             <main class="page-content">
                 <div class="container-max">
-                    <!-- Page Header -->
                     <div class="page-header">
                         <h2>Visão Geral</h2>
                         <p>Resumo das operações de suporte técnico integrado.</p>
@@ -148,10 +137,10 @@
                                     <span class="material-symbols-outlined">assignment_late</span>
                                 </div>
                             </div>
-                            <div class="kpi-value">24</div>
+                            <div class="kpi-value" id="kpi-abertos">—</div>
                             <div class="kpi-trend trend-error">
-                                <span class="material-symbols-outlined">trending_up</span>
-                                <span>+12% vs ontem</span>
+                                <span class="material-symbols-outlined">schedule</span>
+                                <span>Pendentes de atendimento</span>
                             </div>
                         </div>
 
@@ -162,10 +151,10 @@
                                     <span class="material-symbols-outlined">engineering</span>
                                 </div>
                             </div>
-                            <div class="kpi-value">12</div>
+                            <div class="kpi-value" id="kpi-progresso">—</div>
                             <div class="kpi-trend">
                                 <span class="material-symbols-outlined">schedule</span>
-                                <span>Tempo médio: 45m</span>
+                                <span>Em andamento agora</span>
                             </div>
                         </div>
 
@@ -176,10 +165,10 @@
                                     <span class="material-symbols-outlined">inventory_2</span>
                                 </div>
                             </div>
-                            <div class="kpi-value">5</div>
+                            <div class="kpi-value" id="kpi-aguardando">—</div>
                             <div class="kpi-trend">
                                 <span class="material-symbols-outlined">hourglass_empty</span>
-                                <span>Estoque crítico: 1</span>
+                                <span>Aguardando material</span>
                             </div>
                         </div>
 
@@ -190,29 +179,24 @@
                                     <span class="material-symbols-outlined">check_circle</span>
                                 </div>
                             </div>
-                            <div class="kpi-value">18</div>
+                            <div class="kpi-value" id="kpi-concluidos">—</div>
                             <div class="kpi-trend trend-success">
                                 <span class="material-symbols-outlined">trending_up</span>
-                                <span>+5% vs ontem</span>
+                                <span>Encerrados hoje</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Category Filters -->
-                    <div class="category-filters">
+                    <div class="category-filters" id="category-filters">
                         <button class="filter-btn active">Todos</button>
-                        <button class="filter-btn filter-blue"><div class="dot"></div>Informática/TI</button>
-                        <button class="filter-btn filter-yellow"><div class="dot"></div>Elétrica</button>
-                        <button class="filter-btn filter-green"><div class="dot"></div>Predial/Civil</button>
-                        <button class="filter-btn filter-red"><div class="dot"></div>Segurança Eletrônica</button>
-                        <button class="filter-btn filter-purple"><div class="dot"></div>Telecomunicações</button>
                     </div>
 
                     <!-- Ticket Table -->
                     <div class="table-card">
                         <div class="table-header">
                             <h3>Chamados Recentes</h3>
-                            <button class="btn-link">Ver todos</button>
+                            <button class="btn-link" onclick="window.location.href='meus_chamados.html'">Ver todos</button>
                         </div>
                         <div class="table-responsive">
                             <table class="ticket-table">
@@ -226,71 +210,11 @@
                                         <th class="text-right">Ações</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="ticket-tbody">
                                     <tr>
-                                        <td class="font-medium">#1024</td>
-                                        <td>Falha no Switch Core - Rack 02</td>
-                                        <td><span class="badge badge-blue">Informática/TI</span></td>
-                                        <td>
-                                            <div class="priority-label text-error">
-                                                <span class="material-symbols-outlined">warning</span>
-                                                Crítica
-                                            </div>
-                                        </td>
-                                        <td><span class="status-badge status-pending">Pendente</span></td>
-                                        <td class="text-right">
-                                            <div class="table-actions">
-                                                <button class="action-btn text-secondary" title="Visualizar Detalhes">
-                                                    <span class="material-symbols-outlined">visibility</span>
-                                                </button>
-                                                <button class="action-btn text-primary" title="Atribuir Técnico">
-                                                    <span class="material-symbols-outlined">person_add</span>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium">#1025</td>
-                                        <td>Queda de energia no Setor B</td>
-                                        <td><span class="badge badge-yellow">Elétrica</span></td>
-                                        <td>
-                                            <div class="priority-label text-orange">
-                                                <span class="material-symbols-outlined">priority_high</span>
-                                                Alta
-                                            </div>
-                                        </td>
-                                        <td><span class="status-badge status-progress">Em Progresso</span></td>
-                                        <td class="text-right">
-                                            <div class="table-actions">
-                                                <button class="action-btn text-secondary" title="Visualizar Detalhes">
-                                                    <span class="material-symbols-outlined">visibility</span>
-                                                </button>
-                                                <button class="action-btn text-primary" title="Atribuir Técnico">
-                                                    <span class="material-symbols-outlined">person_add</span>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium">#1026</td>
-                                        <td>Vazamento na sala de reuniões</td>
-                                        <td><span class="badge badge-green">Predial/Civil</span></td>
-                                        <td>
-                                            <div class="priority-label text-yellow">
-                                                <span class="material-symbols-outlined">remove</span>
-                                                Média
-                                            </div>
-                                        </td>
-                                        <td><span class="status-badge status-pending">Pendente</span></td>
-                                        <td class="text-right">
-                                            <div class="table-actions">
-                                                <button class="action-btn text-secondary" title="Visualizar Detalhes">
-                                                    <span class="material-symbols-outlined">visibility</span>
-                                                </button>
-                                                <button class="action-btn text-primary" title="Atribuir Técnico">
-                                                    <span class="material-symbols-outlined">person_add</span>
-                                                </button>
-                                            </div>
+                                        <td colspan="6" style="text-align: center; padding: 2rem; color: var(--on-surface-variant);">
+                                            <span class="material-symbols-outlined" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;">hourglass_empty</span>
+                                            Carregando chamados...
                                         </td>
                                     </tr>
                                 </tbody>
@@ -302,8 +226,136 @@
         </div>
     </div>
     
-    <!-- Custom Scripts -->
     <script type="module" src="/script.js"></script>
     <script type="module" src="/main.js"></script>
+    <script type="module">
+        import { fetchTickets, fetchCategories, fetchStatuses, badgeFor, priorityFor, statusFor } from '/supabase.js'
+
+        const BADGE_CLASS    = { 'Informática/TI': 'badge-blue', 'Elétrica': 'badge-yellow', 'Predial/Civil': 'badge-green', 'Segurança Eletrônica': 'badge-red', 'Telecomunicações': 'badge-purple' }
+        const PRIORITY_INFO  = { 'Crítica': { cls: 'text-error', icon: 'warning' }, 'Alta': { cls: 'text-orange', icon: 'priority_high' }, 'Média': { cls: 'text-yellow', icon: 'remove' }, 'Baixa': { cls: 'text-success', icon: 'arrow_downward' } }
+        const STATUS_CSS     = { 'Pendente': 'status-pending', 'Em Progresso': 'status-progress', 'Aguardando Peças': 'status-warning', 'Concluído': 'status-done', 'Cancelado': 'status-cancelled' }
+
+        function renderRow(t) {
+            const cat    = t.categories?.name || '—'
+            const st     = t.statuses?.name   || '—'
+            const pr     = t.priority          || 'Média'
+            const badge  = BADGE_CLASS[cat]   || 'badge-blue'
+            const pInfo  = PRIORITY_INFO[pr]  || { cls: 'text-yellow', icon: 'remove' }
+            const stCls  = STATUS_CSS[st]     || 'status-pending'
+            return `
+            <tr>
+                <td class="font-medium">#${t.ticket_number}</td>
+                <td>${t.title}</td>
+                <td><span class="badge ${badge}">${cat}</span></td>
+                <td>
+                    <div class="priority-label ${pInfo.cls}">
+                        <span class="material-symbols-outlined">${pInfo.icon}</span>
+                        ${pr}
+                    </div>
+                </td>
+                <td><span class="status-badge ${stCls}">${st}</span></td>
+                <td class="text-right">
+                    <div class="table-actions">
+                        <button class="action-btn text-secondary" title="Visualizar Detalhes">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                        <button class="action-btn text-primary" title="Atribuir Técnico">
+                            <span class="material-symbols-outlined">person_add</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>`
+        }
+
+        async function loadDashboard() {
+            const tbody = document.getElementById('ticket-tbody')
+
+            // Carrega tickets
+            const tickets = await fetchTickets({ limit: 10 })
+            if (tickets.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--on-surface-variant);">
+                    <span class="material-symbols-outlined" style="font-size:2rem;display:block;margin-bottom:0.5rem;">inbox</span>
+                    Nenhum chamado encontrado.
+                </td></tr>`
+            } else {
+                tbody.innerHTML = tickets.map(renderRow).join('')
+            }
+
+            // KPIs reais via contagem de status
+            const counts = { abertos: 0, progresso: 0, aguardando: 0, concluidos: 0 }
+            const today  = new Date(); today.setHours(0,0,0,0)
+            tickets.forEach(t => {
+                const st = t.statuses?.name
+                if (st === 'Em Progresso')      counts.progresso++
+                else if (st === 'Aguardando Peças') counts.aguardando++
+                else if (st === 'Concluído' || st === 'Cancelado') counts.concluidos++
+                else counts.abertos++
+            })
+            // Busca contagem total (sem limit)
+            const allTickets = await fetchTickets({ limit: 500 })
+            const fullCounts = { abertos: 0, progresso: 0, aguardando: 0, concluidos: 0 }
+            allTickets.forEach(t => {
+                const st  = t.statuses?.name
+                const dat = new Date(t.closed_at)
+                if (st === 'Em Progresso')           fullCounts.progresso++
+                else if (st === 'Aguardando Peças')  fullCounts.aguardando++
+                else if ((st === 'Concluído' || st === 'Cancelado') && dat >= today) fullCounts.concluidos++
+                else if (st !== 'Concluído' && st !== 'Cancelado') fullCounts.abertos++
+            })
+            document.getElementById('kpi-abertos').textContent   = fullCounts.abertos
+            document.getElementById('kpi-progresso').textContent = fullCounts.progresso
+            document.getElementById('kpi-aguardando').textContent = fullCounts.aguardando
+            document.getElementById('kpi-concluidos').textContent = fullCounts.concluidos
+
+            // Filtros de categoria dinâmicos
+            const categories = await fetchCategories()
+            const filtersEl  = document.getElementById('category-filters')
+            const colorMap   = { blue: 'filter-blue', yellow: 'filter-yellow', green: 'filter-green', red: 'filter-red', purple: 'filter-purple' }
+            const extra = categories.map(c => {
+                const cc = colorMap[c.color] || ''
+                return `<button class="filter-btn ${cc}"><div class="dot"></div>${c.name}</button>`
+            }).join('')
+            filtersEl.innerHTML = `<button class="filter-btn active">Todos</button>` + extra
+
+            // Reativa filtros de categoria
+            filtersEl.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filtersEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'))
+                    btn.classList.add('active')
+                    const cat = btn.textContent.trim()
+                    document.querySelectorAll('#ticket-tbody tr').forEach(row => {
+                        row.style.display = (cat === 'Todos' || row.textContent.includes(cat)) ? '' : 'none'
+                    })
+                })
+            })
+
+            // Filtro de status
+            const statuses = await fetchStatuses()
+            const sel = document.getElementById('status-filter')
+            if (sel) {
+                sel.innerHTML = '<option value="">Filtrar por Status</option>' +
+                    statuses.map(s => `<option value="${s.name}">${s.name}</option>`).join('')
+                sel.addEventListener('change', () => {
+                    const v = sel.value
+                    document.querySelectorAll('#ticket-tbody tr').forEach(row => {
+                        row.style.display = (!v || row.textContent.includes(v)) ? '' : 'none'
+                    })
+                })
+            }
+        }
+
+        // Busca em tempo real
+        document.getElementById('search-btn')?.addEventListener('click', () => {
+            const term = document.getElementById('search-input')?.value.toLowerCase()
+            document.querySelectorAll('#ticket-tbody tr').forEach(row => {
+                row.style.display = row.textContent.toLowerCase().includes(term) ? '' : 'none'
+            })
+        })
+        document.getElementById('search-input')?.addEventListener('keydown', e => {
+            if (e.key === 'Enter') document.getElementById('search-btn')?.click()
+        })
+
+        loadDashboard()
+    </script>
 </body>
 </html>

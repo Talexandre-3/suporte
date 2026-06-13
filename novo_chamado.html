@@ -11,7 +11,6 @@
 <body class="bg-background text-on-background font-body-md">
     <div class="app-layout">
         
-        <!-- Mobile Header (Visible only on small screens) -->
         <header class="mobile-header">
             <button id="menu-btn" class="icon-btn" aria-label="Abrir Menu">
                 <span class="material-symbols-outlined">menu</span>
@@ -22,7 +21,6 @@
             </div>
         </header>
 
-        <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
@@ -36,12 +34,10 @@
                     <span class="material-symbols-outlined">close</span>
                 </button>
             </div>
-
-            <button class="btn-primary new-ticket-btn" onclick="window.location.href='novo_chamado.html'">
+            <button class="btn-primary new-ticket-btn">
                 <span class="material-symbols-outlined">add</span>
                 Novo Chamado
             </button>
-
             <nav class="sidebar-nav">
                 <a href="index.html" class="nav-item">
                     <span class="material-symbols-outlined">dashboard</span>
@@ -60,7 +56,6 @@
                     Configurações
                 </a>
             </nav>
-
             <div class="sidebar-profile" style="margin-top: auto; display: flex; align-items: center; gap: 0.75rem; padding: 1rem 0.5rem; border-top: 1px solid var(--outline-variant); margin-bottom: 0;">
                 <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbFPkdDfq6GCVEHVsj57lfOcPMTYSTGT8cpR8ZkdHb3QN_ZkLQUmv72WAoy68k1DRNfV0JdK6RJyWsxt6jSus77dwHmn-OkWXXEe8cSotuZFwumzsU3dS7MbijV61Z1ATzUpbZGSc_p8_EhbtLB4o5Y5AogSYfMiLV-PqXyKPZTZL63BvXgrzIlyJxBcLJWPOdB5sXo6fNQ_4z4fGguIRmk2GPDFZMw3P-PBeAhRcBhg05DWhAGyZTA5hRHlEofqykz8Q4VMUtUyc" alt="Avatar" class="avatar" style="width: 40px; height: 40px;">
                 <div class="profile-info" style="display: flex; flex-direction: column;">
@@ -72,25 +67,23 @@
 
         <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-        <!-- Main Content Area -->
         <div class="main-wrapper">
-            <!-- Topbar -->
             <header class="topbar">
-                <div class="search-container" style="display: flex; align-items: center; gap: 0.5rem; width: 400px;">
-                    <!-- Hide search here or keep it dummy -->
-                </div>
-
+                <div class="search-container"></div>
                 <div class="topbar-actions">
-                    <div style="position: relative;" class="help-dropdown-container">
-                        <button class="btn-text help-btn" style="display: flex; align-items: center; gap: 0.25rem;">
-                            Suporte
-                            <span class="material-symbols-outlined" style="font-size: 1rem;">help</span>
-                        </button>
-                    </div>
-
                     <div class="profile-dropdown" style="position: relative;">
                         <span class="profile-name-top" style="font-weight: 600; font-size: 0.875rem;">Admin</span>
                         <span class="material-symbols-outlined">arrow_drop_down</span>
+                        <div class="profile-menu" style="display: none; position: absolute; right: 0; top: 100%; background: var(--surface); border: 1px solid var(--outline-variant); border-radius: var(--border-radius-md); box-shadow: var(--shadow-md); min-width: 150px; z-index: 50;">
+                            <a href="configuracoes.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem;">
+                                <span class="material-symbols-outlined" style="font-size: 1.125rem;">account_circle</span>
+                                Perfil do Usuário
+                            </a>
+                            <a href="#" id="logout-btn" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; color: var(--error);">
+                                <span class="material-symbols-outlined" style="font-size: 1.125rem;">logout</span>
+                                Sair
+                            </a>
+                        </div>
                     </div>
                 </div>
             </header>
@@ -102,6 +95,9 @@
                         <p>Preencha os detalhes abaixo para solicitar suporte.</p>
                     </div>
 
+                    <!-- Feedback ao usuário -->
+                    <div id="form-feedback" style="display:none; padding: 1rem; border-radius: var(--border-radius-md); margin-bottom: 1rem; font-weight: 500;"></div>
+
                     <div class="table-card" style="padding: 2rem;">
                         <form id="new-ticket-form">
                             <div class="form-group">
@@ -112,14 +108,11 @@
                             <div class="form-group">
                                 <label for="category">Categoria</label>
                                 <select id="category" class="form-input" required>
-                                    <option value="">Selecione uma categoria</option>
-                                    <option value="Informática/TI">Informática/TI</option>
-                                    <option value="Elétrica">Elétrica</option>
-                                    <option value="Predial/Civil">Predial/Civil</option>
+                                    <option value="">Carregando categorias...</option>
                                 </select>
                             </div>
 
-                            <div class="form-group" id="priority-group">
+                            <div class="form-group">
                                 <label for="priority">Prioridade</label>
                                 <select id="priority" class="form-input">
                                     <option value="Baixa">Baixa</option>
@@ -127,7 +120,6 @@
                                     <option value="Alta">Alta</option>
                                     <option value="Crítica">Crítica</option>
                                 </select>
-                                <p style="font-size: 0.75rem; color: var(--on-surface-variant); margin-top: 0.25rem;">(Usuários de suporte não alteram isso)</p>
                             </div>
 
                             <div class="form-group">
@@ -136,8 +128,8 @@
                             </div>
 
                             <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem;">
-                                <button type="button" class="btn-block" style="background-color: transparent; color: var(--on-surface); border: 1px solid var(--outline-variant); width: auto;" onclick="window.history.back()">Cancelar</button>
-                                <button type="submit" class="btn-block" style="width: auto; padding-left: 2rem; padding-right: 2rem;">Salvar Chamado</button>
+                                <button type="button" id="cancel-btn" class="btn-block" style="background-color: transparent; color: var(--on-surface); border: 1px solid var(--outline-variant); width: auto;">Cancelar</button>
+                                <button type="submit" id="submit-btn" class="btn-block" style="width: auto; padding-left: 2rem; padding-right: 2rem;">Salvar Chamado</button>
                             </div>
                         </form>
                     </div>
@@ -148,6 +140,60 @@
     
     <script type="module" src="/script.js"></script>
     <script type="module" src="/main.js"></script>
+    <script type="module">
+        import { fetchCategories, createTicket } from '/supabase.js'
+
+        // Carrega categorias do banco
+        async function loadCategories() {
+            const cats = await fetchCategories()
+            const sel  = document.getElementById('category')
+            sel.innerHTML = '<option value="">Selecione uma categoria</option>' +
+                cats.map(c => `<option value="${c.id}">${c.name}</option>`).join('')
+        }
+
+        loadCategories()
+
+        // Botão cancelar
+        document.getElementById('cancel-btn').addEventListener('click', () => window.history.back())
+
+        // Submit do formulário
+        document.getElementById('new-ticket-form').addEventListener('submit', async (e) => {
+            e.preventDefault()
+            const submitBtn  = document.getElementById('submit-btn')
+            const feedback   = document.getElementById('form-feedback')
+            const title      = document.getElementById('title').value.trim()
+            const categoryId = document.getElementById('category').value
+            const priority   = document.getElementById('priority').value
+            const description = document.getElementById('description').value.trim()
+
+            if (!categoryId) {
+                feedback.style.display = 'block'
+                feedback.style.backgroundColor = 'var(--error-container)'
+                feedback.style.color = 'var(--on-error-container)'
+                feedback.textContent = 'Por favor, selecione uma categoria.'
+                return
+            }
+
+            submitBtn.disabled = true
+            submitBtn.textContent = 'Salvando...'
+            feedback.style.display = 'none'
+
+            try {
+                await createTicket({ title, description, category_id: categoryId, priority })
+                feedback.style.display = 'block'
+                feedback.style.backgroundColor = 'var(--success-container, #d4edda)'
+                feedback.style.color = 'var(--on-success-container, #155724)'
+                feedback.textContent = '✅ Chamado criado com sucesso! Redirecionando...'
+                setTimeout(() => window.location.href = '/meus_chamados.html', 1500)
+            } catch (err) {
+                feedback.style.display = 'block'
+                feedback.style.backgroundColor = 'var(--error-container)'
+                feedback.style.color = 'var(--on-error-container)'
+                feedback.textContent = `Erro ao criar chamado: ${err.message}`
+                submitBtn.disabled = false
+                submitBtn.textContent = 'Salvar Chamado'
+            }
+        })
+    </script>
 </body>
 </html>
-
