@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TechSupport</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-background text-on-background font-body-md">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-logo">
+                    <div class="logo-icon">TS</div>
+                    <div class="logo-text" style="text-align: left;">
+                        <h2>TechSupport</h2>
+                        <p>Gestão de Infraestrutura</p>
+                    </div>
+                </div>
+                <h3 style="font-size: 1.25rem; font-weight: 600; color: var(--on-surface); margin-top: 1rem;">Acesse sua conta</h3>
+            </div>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">E-mail ou Usuário</label>
+                    <input type="text" id="email" class="form-input" placeholder="admin" required value="admin">
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" class="form-input" placeholder="••••••••" required value="admin">
+                </div>
+                <button type="submit" class="btn-block" style="margin-top: 1.5rem;">
+                    Entrar
+                </button>
+            </form>
+            <p id="login-error" style="color: var(--error); font-size: 0.875rem; text-align: center; margin-top: 1rem; display: none;">Usuário ou senha incorretos.</p>
+        </div>
+    </div>
+    <script type="module">
+        import { supabase } from './main.js'
+        
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault()
+            const email = document.getElementById('email').value
+            const password = document.getElementById('password').value
+            
+            // Simulação local baseada na solicitação do usuário
+            if (email === 'admin' && password === 'admin') {
+                window.location.href = '/'
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email,
+                    password
+                })
+                
+                if (error) {
+                    document.getElementById('login-error').style.display = 'block'
+                } else {
+                    window.location.href = '/'
+                }
+            } catch (err) {
+                // Se não houver Supabase configurado e for admin/admin passa.
+                document.getElementById('login-error').style.display = 'block'
+            }
+        })
+    </script>
+</body>
+</html>

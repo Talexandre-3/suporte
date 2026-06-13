@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte Técnico Integrado - Dashboard</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-background text-on-background font-body-md">
+    <div class="app-layout">
+        
+        <!-- Mobile Header (Visible only on small screens) -->
+        <header class="mobile-header">
+            <button id="menu-btn" class="icon-btn" aria-label="Abrir Menu">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <h1 class="mobile-title">TechSupport</h1>
+            <div class="avatar-sm">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbFPkdDfq6GCVEHVsj57lfOcPMTYSTGT8cpR8ZkdHb3QN_ZkLQUmv72WAoy68k1DRNfV0JdK6RJyWsxt6jSus77dwHmn-OkWXXEe8cSotuZFwumzsU3dS7MbijV61Z1ATzUpbZGSc_p8_EhbtLB4o5Y5AogSYfMiLV-PqXyKPZTZL63BvXgrzIlyJxBcLJWPOdB5sXo6fNQ_4z4fGguIRmk2GPDFZMw3P-PBeAhRcBhg05DWhAGyZTA5hRHlEofqykz8Q4VMUtUyc" alt="Avatar">
+            </div>
+        </header>
+
+        <!-- Sidebar / Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">TS</div>
+                    <div class="logo-text">
+                        <h2>TechSupport</h2>
+                        <p>Gestão de Infraestrutura</p>
+                    </div>
+                </div>
+                <button class="close-sidebar-btn" id="close-sidebar-btn" aria-label="Fechar Menu">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <button class="btn-primary new-ticket-btn">
+                <span class="material-symbols-outlined">add</span>
+                Novo Chamado
+            </button>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item active">
+                    <span class="material-symbols-outlined fill-icon">dashboard</span>
+                    Visão Geral
+                </a>
+                <a href="meus_chamados.html" class="nav-item">
+                    <span class="material-symbols-outlined">assignment</span>
+                    Meus Chamados
+                </a>
+                <a href="relatorios.html" class="nav-item">
+                    <span class="material-symbols-outlined">assessment</span>
+                    Relatórios
+                </a>
+                <a href="configuracoes.html" class="nav-item">
+                    <span class="material-symbols-outlined">settings</span>
+                    Configurações
+                </a>
+            </nav>
+
+            <div class="sidebar-profile" style="margin-top: auto; display: flex; align-items: center; gap: 0.75rem; padding: 1rem 0.5rem; border-top: 1px solid var(--outline-variant); margin-bottom: 0;">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbFPkdDfq6GCVEHVsj57lfOcPMTYSTGT8cpR8ZkdHb3QN_ZkLQUmv72WAoy68k1DRNfV0JdK6RJyWsxt6jSus77dwHmn-OkWXXEe8cSotuZFwumzsU3dS7MbijV61Z1ATzUpbZGSc_p8_EhbtLB4o5Y5AogSYfMiLV-PqXyKPZTZL63BvXgrzIlyJxBcLJWPOdB5sXo6fNQ_4z4fGguIRmk2GPDFZMw3P-PBeAhRcBhg05DWhAGyZTA5hRHlEofqykz8Q4VMUtUyc" alt="Avatar" class="avatar" style="width: 40px; height: 40px;">
+                <div class="profile-info" style="display: flex; flex-direction: column;">
+                    <span class="profile-name" style="font-weight: 600; color: var(--on-primary); font-size: 0.875rem;">Administrador</span>
+                    <span class="profile-role" style="font-size: 0.75rem; color: var(--on-primary-fixed-variant);">Cargo / Setor</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Overlay for mobile sidebar -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <!-- Main Content Area -->
+        <div class="main-wrapper">
+            <!-- Top Navigation Bar (Desktop) -->
+            <header class="topbar">
+                <div class="search-container" style="display: flex; align-items: center; gap: 0.5rem; width: 400px;">
+                    <div style="position: relative; flex: 1;">
+                        <input type="text" class="search-input" id="search-input" placeholder="Buscar chamados por título ou usuário..." style="padding-left: 1rem; width: 100%;">
+                    </div>
+                    <button class="btn-primary" id="search-btn" style="padding: 0.5rem; border-radius: var(--border-radius-md); background-color: var(--secondary); color: white; display: flex; align-items: center; justify-content: center;">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
+                </div>
+
+                <div class="topbar-actions">
+                    <select class="status-filter" style="padding: 0.5rem 1rem; border-radius: var(--border-radius-md); border: 1px solid var(--outline-variant); background-color: var(--surface-container-low); color: var(--on-surface);">
+                        <option value="">Filtrar por Status</option>
+                        <option value="Pendente">Pendente</option>
+                        <option value="Em Progresso">Em Progresso</option>
+                        <option value="Concluído">Concluído</option>
+                    </select>
+
+                    <div class="divider"></div>
+                    
+                    <!-- Botão de Ajuda -->
+                    <div style="position: relative;" class="help-dropdown-container">
+                        <button class="btn-text help-btn" style="display: flex; align-items: center; gap: 0.25rem;">
+                            Suporte
+                            <span class="material-symbols-outlined" style="font-size: 1rem;">help</span>
+                        </button>
+                        <div class="help-dropdown-content" style="display: none; position: absolute; right: 0; top: 100%; background: var(--surface); border: 1px solid var(--outline-variant); padding: 1rem; border-radius: var(--border-radius-md); box-shadow: var(--shadow-md); width: max-content; z-index: 50;">
+                            <p id="help-text" style="font-weight: 600; margin-bottom: 0.5rem;">Informações de Ajuda</p>
+                            <p id="help-email" style="font-size: 0.75rem;">Email: suporte@empresa.com</p>
+                            <p id="help-phone" style="font-size: 0.75rem;">Tel: (11) 9999-9999</p>
+                            <p id="help-site" style="font-size: 0.75rem;">Site: www.suporte.com</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-dropdown" style="position: relative;">
+                        <span class="profile-name-top" style="font-weight: 600; font-size: 0.875rem;">Admin</span>
+                        <span class="material-symbols-outlined">arrow_drop_down</span>
+                        
+                        <div class="profile-menu" style="display: none; position: absolute; right: 0; top: 100%; background: var(--surface); border: 1px solid var(--outline-variant); border-radius: var(--border-radius-md); box-shadow: var(--shadow-md); min-width: 150px; z-index: 50;">
+                            <a href="configuracoes.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; hover: background-color: var(--surface-variant);">
+                                <span class="material-symbols-outlined" style="font-size: 1.125rem;">account_circle</span>
+                                Perfil do Usuário
+                            </a>
+                            <a href="#" id="logout-btn" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; color: var(--error);">
+                                <span class="material-symbols-outlined" style="font-size: 1.125rem;">logout</span>
+                                Sair
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="page-content">
+                <div class="container-max">
+                    <!-- Page Header -->
+                    <div class="page-header">
+                        <h2>Visão Geral</h2>
+                        <p>Resumo das operações de suporte técnico integrado.</p>
+                    </div>
+
+                    <!-- KPI Cards -->
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Chamados Abertos</span>
+                                <div class="kpi-icon icon-error">
+                                    <span class="material-symbols-outlined">assignment_late</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value">24</div>
+                            <div class="kpi-trend trend-error">
+                                <span class="material-symbols-outlined">trending_up</span>
+                                <span>+12% vs ontem</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Em Atendimento</span>
+                                <div class="kpi-icon icon-secondary">
+                                    <span class="material-symbols-outlined">engineering</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value">12</div>
+                            <div class="kpi-trend">
+                                <span class="material-symbols-outlined">schedule</span>
+                                <span>Tempo médio: 45m</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Aguardando Peças</span>
+                                <div class="kpi-icon icon-tertiary">
+                                    <span class="material-symbols-outlined">inventory_2</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value">5</div>
+                            <div class="kpi-trend">
+                                <span class="material-symbols-outlined">hourglass_empty</span>
+                                <span>Estoque crítico: 1</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Concluídos Hoje</span>
+                                <div class="kpi-icon icon-success">
+                                    <span class="material-symbols-outlined">check_circle</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value">18</div>
+                            <div class="kpi-trend trend-success">
+                                <span class="material-symbols-outlined">trending_up</span>
+                                <span>+5% vs ontem</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Filters -->
+                    <div class="category-filters">
+                        <button class="filter-btn active">Todos</button>
+                        <button class="filter-btn filter-blue"><div class="dot"></div>Informática/TI</button>
+                        <button class="filter-btn filter-yellow"><div class="dot"></div>Elétrica</button>
+                        <button class="filter-btn filter-green"><div class="dot"></div>Predial/Civil</button>
+                        <button class="filter-btn filter-red"><div class="dot"></div>Segurança Eletrônica</button>
+                        <button class="filter-btn filter-purple"><div class="dot"></div>Telecomunicações</button>
+                    </div>
+
+                    <!-- Ticket Table -->
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3>Chamados Recentes</h3>
+                            <button class="btn-link">Ver todos</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="ticket-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Assunto</th>
+                                        <th>Categoria</th>
+                                        <th>Prioridade</th>
+                                        <th>Status</th>
+                                        <th class="text-right">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-medium">#1024</td>
+                                        <td>Falha no Switch Core - Rack 02</td>
+                                        <td><span class="badge badge-blue">Informática/TI</span></td>
+                                        <td>
+                                            <div class="priority-label text-error">
+                                                <span class="material-symbols-outlined">warning</span>
+                                                Crítica
+                                            </div>
+                                        </td>
+                                        <td><span class="status-badge status-pending">Pendente</span></td>
+                                        <td class="text-right">
+                                            <div class="table-actions">
+                                                <button class="action-btn text-secondary" title="Visualizar Detalhes">
+                                                    <span class="material-symbols-outlined">visibility</span>
+                                                </button>
+                                                <button class="action-btn text-primary" title="Atribuir Técnico">
+                                                    <span class="material-symbols-outlined">person_add</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium">#1025</td>
+                                        <td>Queda de energia no Setor B</td>
+                                        <td><span class="badge badge-yellow">Elétrica</span></td>
+                                        <td>
+                                            <div class="priority-label text-orange">
+                                                <span class="material-symbols-outlined">priority_high</span>
+                                                Alta
+                                            </div>
+                                        </td>
+                                        <td><span class="status-badge status-progress">Em Progresso</span></td>
+                                        <td class="text-right">
+                                            <div class="table-actions">
+                                                <button class="action-btn text-secondary" title="Visualizar Detalhes">
+                                                    <span class="material-symbols-outlined">visibility</span>
+                                                </button>
+                                                <button class="action-btn text-primary" title="Atribuir Técnico">
+                                                    <span class="material-symbols-outlined">person_add</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium">#1026</td>
+                                        <td>Vazamento na sala de reuniões</td>
+                                        <td><span class="badge badge-green">Predial/Civil</span></td>
+                                        <td>
+                                            <div class="priority-label text-yellow">
+                                                <span class="material-symbols-outlined">remove</span>
+                                                Média
+                                            </div>
+                                        </td>
+                                        <td><span class="status-badge status-pending">Pendente</span></td>
+                                        <td class="text-right">
+                                            <div class="table-actions">
+                                                <button class="action-btn text-secondary" title="Visualizar Detalhes">
+                                                    <span class="material-symbols-outlined">visibility</span>
+                                                </button>
+                                                <button class="action-btn text-primary" title="Atribuir Técnico">
+                                                    <span class="material-symbols-outlined">person_add</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Custom Scripts -->
+    <script type="module" src="/main.js"></script>
+</body>
+</html>
